@@ -4,13 +4,16 @@
   "main": "index.js",
   "scripts": {
     "start": "nodemon index.js",
-    "test": "echo no test specified yet"
+    "test": "echo no test specified yet",
+    "tsc": "tsc"
   },
   "author": "Troy Kirin",
   "license": "MIT",
   "dependencies": {
     "cors": "^2.8.5",
     "express": "^4.17.1",
+    "http": "^0.0.1-security",
+    "node": "^14.4.0",
     "nodemon": "^2.0.4",
     "socket.io": "^2.3.0"
   }
