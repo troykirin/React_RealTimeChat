@@ -3,6 +3,8 @@ import queryString from "query-string";
 import io from "socket.io-client";
 import "./Chat.css";
 
+const ENDPOINT = "localhost:5000";
+
 //outside of component create socket var
 let socket;
 
@@ -17,7 +19,7 @@ const Chat = ({ location }) => {
     const { name, room } = queryString.parse(location.search);
 
     // after first connection
-    socket = io("localhost:5000");
+    socket = io(ENDPOINT);
 
     setName(name);
     setRoom(room);
