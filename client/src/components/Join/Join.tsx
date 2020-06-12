@@ -30,7 +30,7 @@ const Join = () => {
         <Link
           // terrinary operator to call event.preventDefault "prevents buttonclick of link"
           onClick={(event) => (!name || !room ? event.preventDefault() : null)}
-          to={`/chat?name=${name}&room=${room}`}
+          to={`/chat?name=${name}&room=${room}`} // this can be replaced with props passing or redux
         >
           <button className="button mt-20" type="submit">
             Sign In
