@@ -1,5 +1,5 @@
 import React, { Fragment } from "react";
-import Chat from "./Chat.css";
+import "./Chat.css";
 
 const Chat = () => {
   return <h1>Chat</h1>;
