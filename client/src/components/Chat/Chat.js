@@ -28,7 +28,8 @@ const Chat = ({ location }) => {
     // console.log(location.search);
     // console.log(name);
     // console.log(room);
-  });
+  }, [ENDPOINT, location.search]);
+  // use array above to indicate when useEffect should render. Which is when ENDPOINT || location.search changes.
 
   return <h1>Chat</h1>;
 };
