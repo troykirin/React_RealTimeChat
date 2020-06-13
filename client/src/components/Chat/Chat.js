@@ -24,6 +24,10 @@ const Chat = ({ location }) => {
     setName(name);
     setRoom(room);
 
+    socket.emit("join", { name, room }, () => {
+      console.log(`Room was joined by ${name}`);
+    });
+
     console.log(socket);
     // console.log(location.search);
     // console.log(name);
