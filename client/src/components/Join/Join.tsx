@@ -1,11 +1,11 @@
-import React, { Fragment, useState } from "react";
-import { Link } from "react-router-dom";
-import "./Join.css";
+import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
+import './Join.css';
 
 const Join = () => {
   // ---------------------------- default state value
-  const [name, setName] = useState("");
-  const [room, setRoom] = useState("");
+  const [name, setName] = useState('');
+  const [room, setRoom] = useState('');
 
   return (
     <div className="joinOuterContainer">

@@ -13,14 +13,14 @@ const addUser = ({ id, name, room }) => {
   );
 
   if (existingUser) {
-    return { error: "Username is taken." };
+    return { error: 'Username is taken.' };
   }
 
   // otherwise, create user
   const user = { id, name, room };
 
   // push new user onto array of users
-  user.push(user);
+  users.push(user);
 };
 
 const removeUser = (id) => {
