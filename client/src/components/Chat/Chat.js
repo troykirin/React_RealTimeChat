@@ -24,15 +24,12 @@ const Chat = ({ location }) => {
     setName(name);
     setRoom(room);
 
-    socket.emit("join", { name, room }, ({ error }) => {
-      alert(error);
-      console.log(`Room was joined by ${name}`);
-    });
+    socket.emit("join", { name, room }, () => {});
 
-    console.log(socket);
-    // console.log(location.search);
-    // console.log(name);
-    // console.log(room);
+    return () => {
+      socket.emit("disconnect");
+      socket.off();
+    };
   }, [ENDPOINT, location.search]);
   // use array above to indicate when useEffect should render. Which is when ENDPOINT || location.search changes.
 
