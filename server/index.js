@@ -20,8 +20,6 @@ io.on("connection", (socket) => {
     if (error) {
       callback({ error: "error" });
     }
-
-    callback();
   });
 
   socket.on("disconnect", () => {
