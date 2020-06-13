@@ -1,6 +1,7 @@
 const express = require('express');
 const socketio = require('socket.io');
 const http = require('http');
+const cors = require('cors');
 
 const {
   addUser,
@@ -32,8 +33,7 @@ io.on('connection', (socket) => {
 
     socket.emit('message', {
       user: 'admin',
-      //  // template literal string
-      text: `${user.name}, welcome to the room ${user.room}`,
+      text: `${user.name}, welcome to the room ${user.room}`, // template literal string
     });
 
     // send message to everyone besides that one specific user
@@ -48,11 +48,20 @@ io.on('connection', (socket) => {
     callback();
   });
 
+  socket.on('sendMessage', (message, callback) => {
+    const user = getUser(socket.id);
+
+    io.to(user.room).emit('message', { user: user.name, text: message });
+
+    callback();
+  });
+
   socket.on('disconnect', () => {
     console.log('User Left.');
   });
 });
 
+app.use(cors());
 app.use(router);
 
 server.listen(PORT, () => console.log(`Server has started on PORT ${PORT}`));
