@@ -24,7 +24,7 @@ const Join = () => {
             placeholder="Room"
             className="joinInput mt-20"
             type="text"
-            onChange={(e) => setRoom(e.target.value)}
+            onChange={(event) => setRoom(event.target.value)}
           />
         </div>
         <Link

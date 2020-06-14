@@ -3,12 +3,7 @@ const socketio = require('socket.io');
 const http = require('http');
 const cors = require('cors');
 
-const {
-  addUser,
-  removeUser,
-  getUser,
-  getUsersInRoom,
-} = require('./Users/Users.js');
+const { addUser, removeUser, getUser, getUsersInRoom } = require('./users.js');
 
 const PORT = process.env.PORT || 5000;
 
@@ -18,18 +13,24 @@ const app = express();
 const server = http.createServer(app);
 const io = socketio(server);
 
-io.on('connection', (socket) => {
+app.use(cors());
+app.use(router);
+
+io.on('connect', (socket) => {
   console.log('We have a new connection.');
 
   socket.on('join', ({ name, room }, callback) => {
     //do some things when a join happens
     const { error, user } = addUser({
       id: socket.id,
-      name: name,
-      room: room,
+      name,
+      room,
     });
 
     if (error) return callback(error);
+
+    // join room with user
+    socket.join(user.room);
 
     socket.emit('message', {
       user: 'admin',
@@ -40,9 +41,6 @@ io.on('connection', (socket) => {
     socket.broadcast
       .to(user.room)
       .emit('message', { user: 'admin', text: `${user.name}, has joined!` });
-
-    // join room with user
-    socket.join(user.room);
 
     io.to(user.room).emit('roomData', {
       room: user.room,
@@ -57,10 +55,6 @@ io.on('connection', (socket) => {
     const user = getUser(socket.id);
 
     io.to(user.room).emit('message', { user: user.name, text: message });
-    io.to(user.room).emit('roomData', {
-      room: user.room,
-      users: getUsersInRoom(user.room),
-    });
 
     callback();
   });
@@ -70,15 +64,16 @@ io.on('connection', (socket) => {
 
     if (user) {
       io.to(user.room).emit('message', {
-        user: 'admin',
+        user: 'Admin',
         text: `${user.name} has left the room.`,
+      });
+      io.to(user.room).emit('roomData', {
+        room: user.room,
+        users: getUsersInRoom(user.room),
       });
     }
     console.log('User Left.');
   });
 });
-
-app.use(cors());
-app.use(router);
 
 server.listen(PORT, () => console.log(`Server has started on PORT ${PORT}`));
