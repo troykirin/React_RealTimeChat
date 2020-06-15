@@ -18,7 +18,7 @@ app.use(router);
 
 // Server has a new connection.
 io.on('connect', (socket) => {
-  console.log('We have a new connection.');
+  // console.log('We have a new connection.');
 
   // From login page, a join happens.
   // Take in the name and room from input fields, as well as the callback.
@@ -67,21 +67,21 @@ io.on('connect', (socket) => {
 
   socket.on('sendMessage', (message, callback) => {
     const user = getUser(socket.id);
-    console.log('socket.on sendMessage, getUser()');
-    console.log(user);
+    // console.log('socket.on sendMessage, getUser()');
+    // console.log(user);
 
     io.to(user.room).emit('message', {
       user: user.name,
       text: message,
     });
-    console.log(`socket.io to room of ${user.room}`);
-    console.log(`saying a message of ${message}`);
+    // console.log(`socket.io to room of ${user.room}`);
+    // console.log(`saying a message of ${message}`);
 
     // TEST: broadcast list of names to chat of users in the room on every send
 
     const users = getUsersInRoom(user.room);
-    console.log('Testing users return from getUsersInRoom during sendMessage');
-    console.log(users);
+    // console.log('Testing users return from getUsersInRoom during sendMessage');
+    // console.log(users);
 
     // Stringify object to simply display to chatbox from admin
     str = JSON.stringify(users);
@@ -102,6 +102,14 @@ io.on('connect', (socket) => {
     callback();
   });
 
+  socket.on('roomData', () => {
+    const user = getUser(socket.id);
+    const users = getUsersInRoom(user.room);
+
+    console.log('Testing roomData socket.on');
+    console.log(users);
+  });
+
   socket.on('disconnect', () => {
     const user = removeUser(socket.id);
 
@@ -115,7 +123,7 @@ io.on('connect', (socket) => {
         users: getUsersInRoom(user.room),
       });
     }
-    console.log('User Left.');
+    // console.log('User Left.');
   });
 });
 

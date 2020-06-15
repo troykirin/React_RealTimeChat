@@ -4,7 +4,7 @@ import onlineIcon from '../../icons/onlineIcon.png';
 
 import './TextContainer.css';
 
-const TextContainer = ({ users }) => {
+const TextContainer = ({ roomData: room, users }) => {
   console.log(users);
   return (
     <div className="textContainer">
@@ -26,11 +26,6 @@ const TextContainer = ({ users }) => {
           <span role="img" aria-label="emoji">
             ⬅️
           </span>
-          {/* test */}
-          <div>
-            <h2>Test Users</h2>
-            <p>{users}</p>
-          </div>
         </h2>
       </div>
       {users ? (
@@ -47,9 +42,7 @@ const TextContainer = ({ users }) => {
             </h2>
           </div>
         </div>
-      ) : (
-        <div>null</div>
-      )}
+      ) : null}
     </div>
   );
 };
