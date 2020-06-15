@@ -47,10 +47,11 @@ const getUsersInRoom = (room) => {
   console.log('running getUsersInRoom().');
   console.log(users);
 
-  users.filter((user) => user.room === room);
+  const usersList = users.filter((user) => user.room === room);
 
   console.log('after filter');
-  console.log(users);
+  console.log(usersList);
+  return usersList;
 };
 
 module.exports = { addUser, removeUser, getUser, getUsersInRoom };
