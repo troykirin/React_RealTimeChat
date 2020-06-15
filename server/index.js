@@ -65,6 +65,17 @@ io.on('connect', (socket) => {
     console.log(`socket.io to room of ${user.room}`);
     console.log(`saying a message of ${message}`);
 
+    // test 3
+    // the user object from adduser during ajoin should be the same as a send message user obj
+
+    // test addUser and getUser to be the same return
+
+    //temp test
+    io.to(user.room).emit('roomData', {
+      room: user.room,
+      users: getUsersInRoom(user.room),
+    });
+
     callback();
   });
 
