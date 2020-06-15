@@ -56,14 +56,14 @@ io.on('connect', (socket) => {
 
     // TEST: broadcast list of names to chat of users in the room on every send
 
-    const usersList = getUsersInRoom(user.room);
-    console.log('testing userslist');
-    console.log(usersList);
+    const users = getUsersInRoom(user.room);
+    console.log('testing users');
+    console.log(users);
 
     socket.broadcast.to(user.room).emit('message', {
       user: 'Admin Troy',
       room: user.room,
-      text: `Users Currently Logged In: ${usersList}`,
+      text: `Users Currently Logged In: ${users}`,
     });
 
     ///
