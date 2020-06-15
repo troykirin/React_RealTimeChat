@@ -44,14 +44,15 @@ const getUser = (id) => users.find((user) => user.id === id);
 
 const getUsersInRoom = (room) => {
   // TESTING
-  console.log('running getUsersInRoom().');
-  console.log(users);
+  // console.log('running getUsersInRoom().');
+  // console.log(users);
+  // const usersList = users.filter((user) => user.room === room);
+  // console.log('after filter');
+  // console.log(usersList);
+  // return { usersList };
 
-  const usersList = users.filter((user) => user.room === room);
-
-  console.log('after filter');
-  console.log(usersList);
-  return usersList;
+  // return the object itself, not packaged as an object that has to be destructured.
+  return users.filter((user) => user.room === room);
 };
 
 module.exports = { addUser, removeUser, getUser, getUsersInRoom };

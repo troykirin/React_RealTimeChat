@@ -54,22 +54,6 @@ io.on('connect', (socket) => {
       .to(user.room)
       .emit('message', { user: 'Admin', text: `${user.name}, has joined!` });
 
-    // TEST: broadcast list of names to chat of users in the room on every send
-
-    const users = getUsersInRoom(user.room);
-    console.log('testing users');
-    console.log(users);
-
-    socket.broadcast.to(user.room).emit('message', {
-      user: 'Admin Troy',
-      room: user.room,
-      text: `Users Currently Logged In: ${users}`,
-    });
-
-    ///
-    // const { users } = getUsersInRoom(user.room);
-    // console.log(users);
-
     ///
 
     // io.to(user.room).emit('roomData', {
@@ -95,10 +79,18 @@ io.on('connect', (socket) => {
 
     // TEST: broadcast list of names to chat of users in the room on every send
 
-    // test 3
-    // the user object from adduser during ajoin should be the same as a send message user obj
+    const users = getUsersInRoom(user.room);
+    console.log('Testing users return from getUsersInRoom during sendMessage');
+    console.log(users);
 
-    // test addUser and getUser to be the same return
+    // Stringify object to simply display to chatbox from admin
+    str = JSON.stringify(users);
+
+    socket.broadcast.to(user.room).emit('message', {
+      user: 'Admin Troy',
+      room: user.room,
+      text: `Users Currently Logged In: ${str}`,
+    });
 
     //temp test
     io.to(user.room).emit('roomData', {
