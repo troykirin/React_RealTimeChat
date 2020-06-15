@@ -93,6 +93,7 @@ io.on('connect', (socket) => {
     });
 
     //temp test
+    // on a sendMessage, emit roomData to the room's server
     io.to(user.room).emit('roomData', {
       room: user.room,
       users: getUsersInRoom(user.room),
