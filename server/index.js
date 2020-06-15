@@ -27,6 +27,11 @@ io.on('connect', (socket) => {
       room,
     });
 
+    // // TESTING
+    // // ON JOIN, ADD USER
+    // console.log('added user with id of');
+    // console.log(socket.id);
+
     if (error) return callback(error);
 
     // join room with user
@@ -53,8 +58,12 @@ io.on('connect', (socket) => {
 
   socket.on('sendMessage', (message, callback) => {
     const user = getUser(socket.id);
+    console.log('socket.on sendMessage, getUser()');
+    console.log(user);
 
     io.to(user.room).emit('message', { user: user.name, text: message });
+    console.log(`socket.io to room of ${user.room}`);
+    console.log(`saying a message of ${message}`);
 
     callback();
   });

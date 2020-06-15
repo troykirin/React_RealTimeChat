@@ -22,8 +22,11 @@ const addUser = ({ id, name, room }) => {
   // otherwise, create user
   const user = { id, name, room };
 
-  // push new user onto array of users
   users.push(user);
+  // TESTING
+  // // push new user onto array of users
+  // console.log('Users array was pushed on, new users arrray is now.');
+  // console.log(users);
 
   return { user };
 };
@@ -40,10 +43,14 @@ const removeUser = (id) => {
 const getUser = (id) => users.find((user) => user.id === id);
 
 const getUsersInRoom = (room) => {
+  // TESTING
   console.log('running getUsersInRoom().');
   console.log(users);
 
   users.filter((user) => user.room === room);
+
+  console.log('after filter');
+  console.log(users);
 };
 
 module.exports = { addUser, removeUser, getUser, getUsersInRoom };
